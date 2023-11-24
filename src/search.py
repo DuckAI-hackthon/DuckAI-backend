@@ -6,7 +6,7 @@ from rest_framework.decorators import (
 from rest_framework.response import Response
 import json
 from src.gpt import qea, translate, summarize, get_keywords, summarize_in
-from app.models import Historic, Ai, Function
+from app.models import Historic, Ai, Function, ChatHistoric
 from usuario.models import Usuario
 
 from django.shortcuts import get_object_or_404
@@ -39,6 +39,7 @@ def search(request):
     if ai == 1:
         if type == 1:
             response = qea(text)
+            ChatHistoric.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
             print(response)
         elif type == 2:
             response = translate(text, from_lang, to_lang)
