@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from app.models import Translation, Resume
+from app.models import Translation
 
 admin.site.register(Translation)
-admin.site.register(Resume)

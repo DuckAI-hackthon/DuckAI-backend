@@ -7,13 +7,13 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0001_initial'),
+        ('app', '0002_alter_translation_date'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='translation',
             name='date',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='date published'),
+            field=models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True, verbose_name='date published'),
         ),
     ]
