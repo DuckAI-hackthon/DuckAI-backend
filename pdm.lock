@@ -61,6 +61,7 @@ files = [
 
 [[package]]
 <<<<<<< HEAD
+<<<<<<< HEAD
 name = "setuptools"
 version = "69.0.2"
 requires_python = ">=3.8"
@@ -73,6 +74,8 @@ files = [
 [[package]]
 =======
 >>>>>>> CRUD-Tradução-de-Texto(#1)
+=======
+>>>>>>> CRUD-Geração-de-Resumo-#5
 name = "sqlparse"
 version = "0.4.4"
 requires_python = ">=3.5"
