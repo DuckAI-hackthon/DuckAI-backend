@@ -3,8 +3,9 @@
 
 [metadata]
 groups = ["default"]
-strategy = ["cross_platform"]
-lock_version = "4.4"
+cross_platform = true
+static_urls = false
+lock_version = "4.3"
 content_hash = "sha256:5dae465e11e127068688ccabce4e365e0a2de2aa1bbc7bf92ac197ce2360ca51"
 
 [[package]]
