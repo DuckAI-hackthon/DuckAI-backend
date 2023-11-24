@@ -3,7 +3,6 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet
-from app.views import TranslationViewSet
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
