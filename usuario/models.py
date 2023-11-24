@@ -9,9 +9,6 @@ class Usuario(AbstractUser):
     username = None
     email = models.EmailField(_("e-mail address"), unique=True)
     name = models.CharField(_("Name"), max_length=255, blank=True, null=True)
-    data_nascimento = models.DateField(
-        _("Birth Date"), auto_now=False, auto_now_add=False, blank=True, null=True
-    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
