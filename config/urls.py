@@ -12,13 +12,18 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from django.conf import settings
+from django.conf.urls.static import static
+from uploader.router import router as uploader_router
+from src.search import search
+
 router = DefaultRouter()
 router.register(r"ais", AiViewSet)
 router.register(r"favorites", FavoriteViewSet)
 router.register(r"functions", FunctionViewSet)
 router.register(r"historics", HistoricViewSet)
 
-from src.search import search
+
 
 urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
@@ -38,5 +43,7 @@ urlpatterns = [
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("ai/", search, name="ai"),
-    
+    path("api/media/", include(uploader_router.urls)),    
 ]
+
+urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)
