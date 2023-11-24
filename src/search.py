@@ -6,7 +6,7 @@ from rest_framework.decorators import (
 from rest_framework.response import Response
 import json
 from src.gpt import qea, translate, summarize, get_keywords, summarize_in
-from app.models import Historic, Ai
+from app.models import Historic, Ai, Function
 from usuario.models import Usuario
 
 from django.shortcuts import get_object_or_404
@@ -44,6 +44,7 @@ def search(request):
             response = translate(text, from_lang, to_lang)
             print(response)
         elif type == 3:
+            # breakpoint()
             response = summarize(text, amount)
             print(response)
         elif type == 4:
@@ -58,7 +59,8 @@ def search(request):
 
     user_instance = get_object_or_404(Usuario, id=user_id)
     ai_instance = get_object_or_404(Ai, id=ai)
+    type_instance = get_object_or_404(Function, id=type)
 
-    Historic.objects.create(ai=ai, type=type, question=text, user=user_instance, choice=response)
+    Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
     
     return Response({"ai": ai, "type": type, "text": text, "user_id": user_id, "response": response})
