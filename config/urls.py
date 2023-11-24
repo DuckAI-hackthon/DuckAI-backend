@@ -12,7 +12,11 @@ router.register(r"favorites", FavoriteViewSet)
 router.register(r"functions", FunctionViewSet)
 router.register(r"historics", HistoricViewSet)
 
+from src.search import search
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
+
+    path("ai/", search, name="ai"),
 ]
