@@ -9,7 +9,7 @@ import json
 @api_view(["GET"])
 @authentication_classes([])
 @permission_classes([])
-def ai(request):
+def search(request):
     ai = request.GET.get("ai")
     type = request.GET.get("type")
     data = json.loads(request.body.decode('utf-8'))
@@ -19,4 +19,4 @@ def ai(request):
 
     print(ai, type, text, user_id)
 
-    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id}, )
+    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id})

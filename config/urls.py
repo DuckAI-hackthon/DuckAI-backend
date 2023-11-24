@@ -12,11 +12,11 @@ router.register(r"resumes", ResumeViewSet)
 router.register(r"keywords", KeyWordsViewSet)
 router.register(r"questions", QuestionViewSet)
 
-from app.views.ai import ai
+from src.search import search
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
 
-    path("ai/", ai, name="ai"),
+    path("ai/", search, name="ai"),
 ]
