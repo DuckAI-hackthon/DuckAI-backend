@@ -6,7 +6,7 @@ def qea(prompt):
     completion = client.chat.completions.create(model="gpt-3.5-turbo",
     messages=[{"role": "user", "content": prompt}],
     temperature=0.7)
-    obj = {id: completion.id,
+    obj = {"id": completion.id,
            "response": completion.choices[0].message.content }
     # print(obj)
     return obj
@@ -15,7 +15,7 @@ def translate(prompt, from_lang, to_lang):
     completion = client.chat.completions.create(model="gpt-3.5-turbo",
     messages=[{"role": "user", "content": f"Traduza {prompt} de {from_lang} para {to_lang}"}],
     temperature=0.7)
-    obj = {id: completion.id,
+    obj = {"id": completion.id,
            "response": completion.choices[0].message.content }
     return obj
 
