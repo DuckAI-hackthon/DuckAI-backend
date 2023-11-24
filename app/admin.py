@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from app.models import Translation, Resume, KeyWords, Question
+from app.models import Ai, Favorite, Function, Historic
 
-admin.site.register(Translation)
-admin.site.register(Resume)
-admin.site.register(KeyWords)
-admin.site.register(Question)
+admin.site.register(Ai)
+admin.site.register(Favorite)
+admin.site.register(Function)
+admin.site.register(Historic)

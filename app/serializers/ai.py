@@ -1,8 +1,8 @@
 from rest_framework.serializers import ModelSerializer
 
-from app.models import Resume
+from app.models import Ai
 
-class ResumeSerializer(ModelSerializer):
+class AiSerializer(ModelSerializer):
     class Meta:
-        model = Resume
+        model = Ai
         fields = "__all__"
