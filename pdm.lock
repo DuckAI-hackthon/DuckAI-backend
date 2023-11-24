@@ -3,9 +3,10 @@
 
 [metadata]
 groups = ["default"]
-strategy = ["cross_platform"]
-lock_version = "4.4"
-content_hash = "sha256:0d955a3aeb92d137b2206b788ce66136b21b51ca8b59fbb230be8dbb063eb603"
+cross_platform = true
+static_urls = false
+lock_version = "4.3"
+content_hash = "sha256:b17e5cb10368eb01ae28d0461ac58ae254c0d2808966835931d9437b4f24ebf6"
 
 [[package]]
 name = "asgiref"
