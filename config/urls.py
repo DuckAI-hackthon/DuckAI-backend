@@ -3,14 +3,14 @@ from django.urls import include, path
 
 from rest_framework.routers import DefaultRouter
 
-from app.views import TranslationViewSet, ResumeViewSet, KeyWordsViewSet, QuestionViewSet
+from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet
 
 router = DefaultRouter()
 
-router.register(r"translations", TranslationViewSet)
-router.register(r"resumes", ResumeViewSet)
-router.register(r"keywords", KeyWordsViewSet)
-router.register(r"questions", QuestionViewSet)
+router.register(r"ais", AiViewSet)
+router.register(r"favorites", FavoriteViewSet)
+router.register(r"functions", FunctionViewSet)
+router.register(r"historics", HistoricViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
