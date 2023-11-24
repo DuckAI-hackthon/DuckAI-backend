@@ -14,9 +14,9 @@ def ai(request):
     type = request.GET.get("type")
     data = json.loads(request.body.decode('utf-8'))
 
-            # Acesse o valor associado à chave "text"
     text = data.get('text', '')
+    user_id = data.get('user_id', '')
 
-    print(ai, type, text)
+    print(ai, type, text, user_id)
 
-    return Response({"ai": ai, "type": type, "text": text}, )
+    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id}, )
