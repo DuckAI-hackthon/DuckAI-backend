@@ -5,6 +5,7 @@ from rest_framework.decorators import (
 )
 from rest_framework.response import Response
 import json
+from src.gpt import qea
 
 @api_view(["GET"])
 @authentication_classes([])
@@ -17,6 +18,16 @@ def search(request):
     text = data.get('text', '')
     user_id = data.get('user_id', '')
 
-    print(ai, type, text, user_id)
+    response = ''
 
-    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id})
+    teste = qea(text)
+
+    teste_modificado = teste.replace('>', '"')
+
+    teste_modificado = teste.replace('<', '"')
+
+    teste_json = json.dumps(teste)
+
+    print(teste)
+
+    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id, "response": teste_modificado})

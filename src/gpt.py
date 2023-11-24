@@ -8,6 +8,7 @@ def qea(prompt):
     temperature=0.7)
     obj = {id: completion.id,
            "response": completion.choices[0].message.content }
+    # print(obj)
     return obj
 
 def translate(prompt, from_lang, to_lang):
@@ -44,3 +45,5 @@ def summarize_in(prompt, words):
     obj = {id: completion.id,
            "response": completion.choices[0].message.content }
     return obj
+
+qea("Olá, eu sou o GPT-3.5 Turbo, um robô que pode te ajudar a traduzir textos, resumir textos, identificar palavras-chave e resumir textos em um número específico de palavras. Como posso te ajudar?")
