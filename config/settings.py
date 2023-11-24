@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_extensions",
+    "drf_spectacular",
     "rest_framework",
     "rest_framework_simplejwt",
     "usuario",
@@ -117,6 +118,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
  }
 
 
@@ -144,3 +146,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "usuario.Usuario"
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Duck IA",
+    "DESCRIPTION": "API para gerenciamento do Duck IA",
+    "VERSION": "1.0.0",
+}
