@@ -16,7 +16,7 @@ from django.conf.urls.static import static
 from uploader.router import router as uploader_router
 from src.search import search
 
-from usuario import redefinirsenha
+from usuario import resetPassword
 from usuario import login
 
 from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet, ChatViewSet, ChatHistoryViewSet
@@ -51,8 +51,8 @@ urlpatterns = [
     path("ai/", search, name="ai"),
     path("api/media/", include(uploader_router.urls)),    
     
-    path('api/forget_password/', redefinirsenha.forget_password, name='forget_password'),
-    path('api/reset_password/', redefinirsenha.reset_password, name='reset_password'),
+    path('api/forget_password/', resetPassword.forget_password, name='forget_password'),
+    path('api/reset_password/', resetPassword.reset_password, name='reset_password'),
     path('api/signup/', login.create_user, name='create_user'),
     path('api/login/', login.get_user, name='get_user'),
 ]
