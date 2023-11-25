@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-client = OpenAI(api_key='')
+client = OpenAI(api_key='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')
 
 def qea(prompt):
     completion = client.chat.completions.create(model="gpt-3.5-turbo",

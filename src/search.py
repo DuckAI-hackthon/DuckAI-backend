@@ -6,7 +6,7 @@ from rest_framework.decorators import (
 from rest_framework.response import Response
 import json
 from src.gpt import qea, translate, summarize, get_keywords, summarize_in
-from app.models import Historic, Ai, Function, ChatHistoric
+from app.models import Historic, Ai, Function, ChatHistory, Chat
 from usuario.models import Usuario
 
 from django.shortcuts import get_object_or_404
@@ -36,10 +36,16 @@ def search(request):
     response = None
     print(type, ai)
 
+    # chat = Chat.objects.filter(user=user_id).first()
+
+    user_instance = get_object_or_404(Usuario, id=1)
+    ai_instance = get_object_or_404(Ai, id=ai)
+    type_instance = get_object_or_404(Function, id=type)
+
     if ai == 1:
         if type == 1:
             response = qea(text)
-            ChatHistoric.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
+            # ChatHistory.objects.create(chat=chat, ai=ai_instance, function=type_instance, question=text, choice=response)
             print(response)
         elif type == 2:
             response = translate(text, from_lang, to_lang)
@@ -57,10 +63,6 @@ def search(request):
 
     elif ai == 2:
         print("gpt-3.5")
-
-    user_instance = get_object_or_404(Usuario, id=user_id)
-    ai_instance = get_object_or_404(Ai, id=ai)
-    type_instance = get_object_or_404(Function, id=type)
 
     Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
     
