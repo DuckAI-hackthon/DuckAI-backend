@@ -28,6 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.duckai.tech'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://api.duckai.tech',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
