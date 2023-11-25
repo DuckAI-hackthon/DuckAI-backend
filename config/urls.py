@@ -15,7 +15,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from uploader.router import router as uploader_router
 from src.search import search
-from usuario import cadastro
+from usuario import login
 
 from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet, ChatViewSet, ChatHistoryViewSet
 
@@ -48,7 +48,8 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("ai/", search, name="ai"),
     path("api/media/", include(uploader_router.urls)),    
-    path('api/signup/', cadastro.create_user, name='create_user'),
+    path('api/signup/', login.create_user, name='create_user'),
+    path('api/login/', login.get_user, name='get_user'),
 ]
 
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)
