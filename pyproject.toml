@@ -17,6 +17,7 @@ dependencies = [
     "drf-spectacular>=0.26.5",
     "python-magic>=0.4.27",
     "Pillow>=10.1.0",
+    "replicate>=0.20.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
