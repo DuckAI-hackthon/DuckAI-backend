@@ -11,6 +11,7 @@ from .models import Usuario
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from django.contrib.auth import authenticate, get_user_model
 import json
+from app.models import Chat
 User = get_user_model()
 
 @api_view(['POST'])
@@ -25,12 +26,15 @@ def create_user(request):
         if Usuario.objects.filter(email=email).exists():
             return Response({"error": "Email já cadastrado"}, status=400)
         if email and password:
-              user = Usuario.objects.create(email=email)  
-              user.set_password(password)
-              user.name = name
-              user.birth = birth
-              user.save()
-              return Response({"message": "Usuário cadastrado com sucesso."}, status=201)
+            user = Usuario.objects.create(email=email)  
+            user.set_password(password)
+            user.name = name
+            user.birth = birth
+            user.save()
+            chat = Chat.objects.create(user=user)
+            return Response({"message": "Usuário cadastrado com sucesso."}, status=201)
+
+        
 
 @api_view(['POST'])
 @authentication_classes([])

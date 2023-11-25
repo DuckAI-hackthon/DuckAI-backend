@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-teste = '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'
+teste = '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'
 import json
 client = OpenAI(api_key=teste)
 
