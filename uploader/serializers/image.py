@@ -7,7 +7,7 @@ from utils.files import CONTENT_TYPE_JPG, CONTENT_TYPE_PNG, get_content_type
 class ImageUploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ["attachment_key", "file", "description", "uploaded_on"]
+        fields = ["attachment_key", "file", "description", "uploaded_on", "nome", "turma", "url"]
         read_only_fields = ["attachment_key", "uploaded_on"]
         extra_kwargs = {"file": {"write_only": True}}
 

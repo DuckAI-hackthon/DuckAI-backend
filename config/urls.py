@@ -22,6 +22,7 @@ from usuario import login
 from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet, ChatViewSet, ChatHistoryViewSet
 from uploader.views import ImageUploadViewSet
 
+
 router = DefaultRouter()
 router.register(r"ais", AiViewSet)
 router.register(r"favorites", FavoriteViewSet)
@@ -36,16 +37,8 @@ from app.views.historic import get_historic_by_user
 
 urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
-    path(
-        "api/swagger/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
-    path(
-        "api/redoc/",
-        SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
-    ),
+    path("api/swagger/",SpectacularSwaggerView.as_view(url_name="schema"),name="swagger-ui",),
+    path("api/redoc/",SpectacularRedocView.as_view(url_name="schema"),name="redoc",),
     path("api/", include(usuario_router.urls)),
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
@@ -53,7 +46,6 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("ai/", search, name="ai"),
     path("api/media/", include(uploader_router.urls)),    
-    
     path('api/forget_password/', resetPassword.forget_password, name='forget_password'),
     path('api/reset_password/', resetPassword.reset_password, name='reset_password'),
     path('api/signup/', login.create_user, name='create_user'),
