@@ -36,16 +36,18 @@ def search(request):
     response = None
     print(type, ai)
 
-    # chat = Chat.objects.filter(user=user_id).first()
 
     user_instance = get_object_or_404(Usuario, id=1)
     ai_instance = get_object_or_404(Ai, id=ai)
     type_instance = get_object_or_404(Function, id=type)
 
+    chat = Chat.objects.filter(user=user_instance)
     if ai == 1:
         if type == 1:
             response = qea(text)
-            # ChatHistory.objects.create(chat=chat, ai=ai_instance, function=type_instance, question=text, choice=response)
+            chatHistory = ChatHistory.objects.create(ai=ai_instance, function=type_instance, question=text, choice=response)
+            chatHistory.chat.set(chat)
+            chatHistory.save()
             print(response)
         elif type == 2:
             response = translate(text, from_lang, to_lang)
