@@ -39,7 +39,12 @@ def search(request):
     print(type, ai)
 
     user_instance = get_object_or_404(Usuario, id=user_id)
-    ai_instance = get_object_or_404(Ai, id=ai)
+    if ai == 1:
+        ai_instance = Ai.objects.get(name="GPT")
+    elif ai == 2:
+        ai_instance = Ai.objects.get(name="Llama")
+    elif ai == 3:
+        ai_instance = Ai.objects.get(name="Hercai")
     type_instance = get_object_or_404(Function, id=type)
 
     chat = Chat.objects.filter(user=user_instance)
@@ -101,4 +106,62 @@ def search(request):
 
     Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
     
+    return Response({"ai": ai, "type": type, "text": text, "user_id": user_id, "response": response})
+
+
+@api_view(["POST"])
+@authentication_classes([])
+@permission_classes([])
+def pesquisa(request):
+    ai = int(request.GET.get("ai"))
+    type = int(request.GET.get("type"))
+    data = json.loads(request.body.decode('utf-8'))
+
+    text = data.get('text', '')
+    user_id = int(data.get('user_id', ''))
+
+    from_lang = data.get('from_lang', '')
+    to_lang = data.get('to_lang', '')
+
+    amount = data.get('amount', '')
+
+    keyNum = data.get('keyNum', '')
+
+    words = data.get('words', '')
+
+    print(ai, type, text, user_id)
+
+    response = None
+
+    user_instance = get_object_or_404(Usuario, id=user_id)
+    if ai == 1:
+        ai_instance = Ai.objects.get(name="GPT")
+    elif ai == 2:
+        ai_instance = Ai.objects.get(name="Llama")
+    elif ai == 3:
+        ai_instance = Ai.objects.get(name="Hercai")
+    type_instance = get_object_or_404(Function, id=type)
+
+    chat = Chat.objects.filter(user=user_instance)
+    if ai == 1:
+        if type == 1:
+            print('entrou')
+            response = qeaGPT(text)
+            chatHistory = ChatHistory.objects.create(ai=ai_instance, function=type_instance, question=text, choice=response)
+            chatHistory.chat.set(chat)
+            chatHistory.save()
+            print(response)
+        elif type == 2:
+            response = translateGPT(text, from_lang, to_lang)
+            print(response)
+        elif type == 3:
+            if amount != '':
+                response = summarizeGPT(text, amount)
+            elif words != '':
+                response = summarize_inGPT(text, words)
+            print(response)
+        elif type == 4:
+            response = get_keywordsGPT(text, keyNum)
+            print(response)
+
     return Response({"ai": ai, "type": type, "text": text, "user_id": user_id, "response": response})

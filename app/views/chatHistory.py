@@ -22,13 +22,22 @@ from django.shortcuts import get_object_or_404
 @permission_classes([])
 def getChatHistoricUser(request):
     user_id = request.GET.get('user_id')
-    ai_id = request.GET.get('ai_id')
+    ai_id = int(request.GET.get('ai_id'))
 
     # Obtém as instâncias de usuário e AI
     user_instance = get_object_or_404(Usuario, id=user_id)
     chat_instance = get_object_or_404(Chat, user=user_instance)
-    ai_instance = get_object_or_404(Ai, id=ai_id)
+    print(ai_id)
+    ai_instance = Ai.objects.get(name="GPT")
+    if ai_id == 1:
+        print('aqui')
+        ai_instance = Ai.objects.get(name="GPT")
+    elif ai_id == 2:
+        ai_instance = Ai.objects.get(name="Llama")
+    elif ai_id == 3:
+        ai_instance = Ai.objects.get(name="Hercai")
 
+    print(ai_instance)
     # Filtra os históricos de bate-papo com base nas instâncias de usuário e AI
     chat_histories = ChatHistory.objects.filter(chat=chat_instance, ai=ai_instance)
 

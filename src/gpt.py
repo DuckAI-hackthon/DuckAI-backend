@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-teste = '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'
+teste = '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'
 import json
 client = OpenAI(api_key=teste)
 
@@ -9,7 +9,7 @@ def qeaGPT(prompt):
     messages=[{"role": "user", "content": prompt}],
     temperature=0.7)
     obj = str(completion.choices[0].message.content)
-
+    print(obj)
     return obj
 
 def translateGPT(prompt, from_lang, to_lang):
@@ -47,3 +47,5 @@ def summarize_inGPT(prompt, words):
     obj = str(completion.choices[0].message.content)
 
     return obj
+
+qeaGPT('O que é um computador?')

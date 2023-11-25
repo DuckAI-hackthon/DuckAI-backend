@@ -14,7 +14,7 @@ from drf_spectacular.views import (
 from django.conf import settings
 from django.conf.urls.static import static
 from uploader.router import router as uploader_router
-from src.search import search
+from src.search import search, pesquisa
 
 from usuario import resetPassword
 from usuario import login
@@ -53,6 +53,7 @@ urlpatterns = [
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("ai/", search, name="ai"),
+    path("api/pesquisa/", pesquisa, name="pesquisa"),
     path("api/media/", include(uploader_router.urls)),    
     
     path('api/forget_password/', resetPassword.forget_password, name='forget_password'),
