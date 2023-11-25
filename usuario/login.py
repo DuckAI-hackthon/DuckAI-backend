@@ -12,6 +12,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from django.contrib.auth import authenticate, get_user_model
 import json
 User = get_user_model()
+from app.models import Chat
 
 @api_view(['POST'])
 @authentication_classes([])
@@ -29,6 +30,7 @@ def create_user(request):
               user.set_password(password)
               user.name = name
               user.birth = birth
+              chat = Chat.object.create(user=user)
               user.save()
               return Response({"message": "Usuário cadastrado com sucesso."}, status=201)
 
