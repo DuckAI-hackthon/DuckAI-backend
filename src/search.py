@@ -54,7 +54,10 @@ def search(request):
             response = translateGPT(text, from_lang, to_lang)
             print(response)
         elif type == 3:
-            response = summarize_inGPT(text,"100")
+            if amount != '':
+                response = summarizeGPT(text, amount)
+            elif words != '':
+                response = summarize_inGPT(text, words)
             print(response)
         elif type == 4:
             response = get_keywordsGPT(text, keyNum)
