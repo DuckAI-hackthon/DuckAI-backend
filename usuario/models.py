@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
-
+from uploader.models import Image
 class Usuario(AbstractUser):
     username = None
     email = models.EmailField(_("e-mail address"), unique=True)
@@ -16,6 +16,15 @@ class Usuario(AbstractUser):
         _("Password Reset Token Created"), blank=True, null=True
     )
     birth = models.DateField(_("Birth"), blank=True, null=True)
+    profile = models.ForeignKey(
+        Image,
+        related_name="+",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        default=None,
+    )
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
