@@ -7,6 +7,7 @@ from rest_framework.response import Response
 import json
 from src.gpt import qeaGPT, translateGPT, summarizeGPT, get_keywordsGPT, summarize_inGPT
 from src.llama import qeaLlama, translateLlama, summarizeLlama, get_keywordsLlama, summarize_inLlama
+from src.hercai import qeaHercai, translateHercai, summarizeHercai, get_keywordsHercai
 from app.models import Historic, Ai, Function, ChatHistory, Chat
 from usuario.models import Usuario
 
@@ -82,6 +83,26 @@ def search(request):
             print(response)
         elif type == 5:
             response = summarize_inLlama(text, words)
+            print(response)
+
+    elif ai == 3:
+        if type == 1:
+            response = qeaHercai(text)
+            chatHistory = ChatHistory.objects.create(ai=ai_instance, function=type_instance, question=text, choice=response)
+            chatHistory.chat.set(chat)
+            chatHistory.save()
+            print(response)
+        elif type == 2:
+            response = translateHercai(text, from_lang, to_lang)
+            print(response)
+        elif type == 3:
+            response = summarizeHercai(text)
+            print(response)
+        elif type == 4:
+            response = get_keywordsHercai(text, keyNum)
+            print(response)
+        elif type == 5:
+            response = summarizeHercai(text)
             print(response)
 
     Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
