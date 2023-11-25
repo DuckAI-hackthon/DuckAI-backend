@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from usuario.router import router as usuario_router
-from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -18,11 +17,15 @@ from uploader.router import router as uploader_router
 from src.search import search
 from usuario import cadastro
 
+from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet, ChatViewSet, ChatHistoryViewSet
+
 router = DefaultRouter()
 router.register(r"ais", AiViewSet)
 router.register(r"favorites", FavoriteViewSet)
 router.register(r"functions", FunctionViewSet)
 router.register(r"historics", HistoricViewSet)
+router.register(r"chats", ChatViewSet)
+router.register(r"chatHistories", ChatHistoryViewSet)
 
 
 
