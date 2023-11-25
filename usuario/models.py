@@ -12,6 +12,12 @@ class Usuario(AbstractUser):
     data_nascimento = models.DateField(
         _("Birth Date"), auto_now=False, auto_now_add=False, blank=True, null=True
     )
+    password_reset_token = models.CharField(
+        _("Password Reset Token"), max_length=255, blank=True, null=True
+    )
+    password_reset_token_created = models.DateTimeField(
+        _("Password Reset Token Created"), blank=True, null=True
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
