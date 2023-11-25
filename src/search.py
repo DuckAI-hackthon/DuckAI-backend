@@ -38,7 +38,7 @@ def search(request):
     response = None
     print(type, ai)
 
-    user_instance = get_object_or_404(Usuario, id=1)
+    user_instance = get_object_or_404(Usuario, id=user_id)
     ai_instance = get_object_or_404(Ai, id=ai)
     type_instance = get_object_or_404(Function, id=type)
 
@@ -54,10 +54,7 @@ def search(request):
             response = translateGPT(text, from_lang, to_lang)
             print(response)
         elif type == 3:
-            if amount != '':
-                response = summarizeGPT(text, amount)
-            elif words != '':
-                response = summarize_inGPT(text, words)
+            response = summarize_inGPT(text,"100")
             print(response)
         elif type == 4:
             response = get_keywordsGPT(text, keyNum)

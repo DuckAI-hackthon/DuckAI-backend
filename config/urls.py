@@ -32,6 +32,7 @@ router.register(r"chatHistories", ChatHistoryViewSet)
 router.register(r"image", ImageUploadViewSet)
 
 from app.views.historic import get_historic_by_user
+from app.views.chatHistory import getChatHistoricUser
 
 
 urlpatterns = [
@@ -60,6 +61,7 @@ urlpatterns = [
     path('api/login/', login.get_user, name='get_user'),
 
     path('api/get_historic_by_user/', get_historic_by_user, name='get_historic_by_user'),
+    path('api/get_chat_history_user/', getChatHistoricUser, name='get_chat_history_user'),
     path('admin/uploader/image/', ImageUploadViewSet.as_view({'post': 'create'}), name='image-upload'),
 ]
 
