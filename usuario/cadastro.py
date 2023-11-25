@@ -15,7 +15,7 @@ def create_user(request):
         name = request.data.get("name")
         data_nascimento = request.data.get("data_nascimento")
         if Usuario.objects.filter(email=email).exists():
-            return Response({"error": "Email já cadastrado"}, status=400)
+            return Response({"error": "Email já cadastrado", "status": 400})
         if email and password:
               user = Usuario.objects.create(email=email)  
               user.set_password(password)
