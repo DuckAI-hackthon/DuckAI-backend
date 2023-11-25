@@ -29,6 +29,7 @@ router.register(r"historics", HistoricViewSet)
 router.register(r"chats", ChatViewSet)
 router.register(r"chatHistories", ChatHistoryViewSet)
 
+from app.views.historic import get_historic_by_user
 
 
 urlpatterns = [
@@ -55,6 +56,8 @@ urlpatterns = [
     path('api/reset_password/', resetPassword.reset_password, name='reset_password'),
     path('api/signup/', login.create_user, name='create_user'),
     path('api/login/', login.get_user, name='get_user'),
+
+    path('api/get_historic_by_user/', get_historic_by_user, name='get_historic_by_user'),
 ]
 
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)

@@ -6,3 +6,4 @@ class AiSerializer(ModelSerializer):
     class Meta:
         model = Ai
         fields = "__all__"
+        depth = 1

@@ -14,7 +14,7 @@ from usuario.models import Usuario
 from django.shortcuts import get_object_or_404
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 @authentication_classes([])
 @permission_classes([])
 def search(request):
@@ -37,9 +37,6 @@ def search(request):
     # Inicialize a variável response com um valor padrão
     response = None
     print(type, ai)
-
-    print()
-
 
     user_instance = get_object_or_404(Usuario, id=1)
     ai_instance = get_object_or_404(Ai, id=ai)
