@@ -5,7 +5,8 @@ from rest_framework.decorators import (
 )
 from rest_framework.response import Response
 import json
-from src.gpt import qea, translate, summarize, get_keywords, summarize_in
+from src.gpt import qeaGPT, translateGPT, summarizeGPT, get_keywordsGPT, summarize_inGPT
+from src.llama import qeaLlama, translateLlama, summarizeLlama, get_keywordsLlama, summarize_inLlama
 from app.models import Historic, Ai, Function, ChatHistory, Chat
 from usuario.models import Usuario
 
@@ -44,27 +45,44 @@ def search(request):
     chat = Chat.objects.filter(user=user_instance)
     if ai == 1:
         if type == 1:
-            response = qea(text)
+            response = qeaGPT(text)
             chatHistory = ChatHistory.objects.create(ai=ai_instance, function=type_instance, question=text, choice=response)
             chatHistory.chat.set(chat)
             chatHistory.save()
             print(response)
         elif type == 2:
-            response = translate(text, from_lang, to_lang)
+            response = translateGPT(text, from_lang, to_lang)
             print(response)
         elif type == 3:
             # breakpoint()
-            response = summarize(text, amount)
+            response = summarizeGPT(text, amount)
             print(response)
         elif type == 4:
-            response = get_keywords(text, keyNum)
+            response = get_keywordsGPT(text, keyNum)
             print(response)
         elif type == 5:
-            response = summarize_in(text, words)
+            response = summarize_inGPT(text, words)
             print(response)
 
     elif ai == 2:
-        print("gpt-3.5")
+        if type == 1:
+            response = qeaLlama(text)
+            chatHistory = ChatHistory.objects.create(ai=ai_instance, function=type_instance, question=text, choice=response)
+            chatHistory.chat.set(chat)
+            chatHistory.save()
+            print(response)
+        elif type == 2:
+            response = translateLlama(text, from_lang, to_lang)
+            print(response)
+        elif type == 3:
+            response = summarizeLlama(text, amount)
+            print(response)
+        elif type == 4:
+            response = get_keywordsLlama(text, keyNum)
+            print(response)
+        elif type == 5:
+            response = summarize_inLlama(text, words)
+            print(response)
 
     Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
     
