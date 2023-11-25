@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key='')
 
 def qeaGPT(prompt):
     completion = client.chat.completions.create(model="gpt-3.5-turbo",

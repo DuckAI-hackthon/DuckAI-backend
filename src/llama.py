@@ -1,6 +1,6 @@
 import replicate
 
-LLAMA_API_KEY = "r8_bU7fHrkCLAABnrbBFmMNKxgg7iS2LFS281v2H"
+LLAMA_API_KEY = ""
 
 client = replicate.Client(api_token=LLAMA_API_KEY)
 
