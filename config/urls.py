@@ -20,6 +20,7 @@ from usuario import resetPassword
 from usuario import login
 
 from app.views import AiViewSet, FavoriteViewSet, FunctionViewSet, HistoricViewSet, ChatViewSet, ChatHistoryViewSet
+from uploader.views import ImageUploadViewSet
 
 router = DefaultRouter()
 router.register(r"ais", AiViewSet)
@@ -28,6 +29,7 @@ router.register(r"functions", FunctionViewSet)
 router.register(r"historics", HistoricViewSet)
 router.register(r"chats", ChatViewSet)
 router.register(r"chatHistories", ChatHistoryViewSet)
+router.register(r"image", ImageUploadViewSet)
 
 from app.views.historic import get_historic_by_user
 
@@ -58,6 +60,7 @@ urlpatterns = [
     path('api/login/', login.get_user, name='get_user'),
 
     path('api/get_historic_by_user/', get_historic_by_user, name='get_historic_by_user'),
+    path('admin/uploader/image/', ImageUploadViewSet.as_view({'post': 'create'}), name='image-upload'),
 ]
 
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)

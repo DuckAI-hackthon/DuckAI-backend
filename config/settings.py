@@ -26,8 +26,17 @@ SECRET_KEY = 'django-insecure-hlfw$mk+aj@5uf61ofvd!wf&5yi#1u7ry^tdlt7q#6djdzxsk5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.duckai.tech'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://api.duckai.tech',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
