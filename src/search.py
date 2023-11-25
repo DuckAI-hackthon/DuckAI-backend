@@ -38,6 +38,8 @@ def search(request):
     response = None
     print(type, ai)
 
+    print()
+
 
     user_instance = get_object_or_404(Usuario, id=1)
     ai_instance = get_object_or_404(Ai, id=ai)
@@ -55,16 +57,14 @@ def search(request):
             response = translateGPT(text, from_lang, to_lang)
             print(response)
         elif type == 3:
-            # breakpoint()
-            response = summarizeGPT(text, amount)
+            if amount != '':
+                response = summarizeGPT(text, amount)
+            elif words != '':
+                response = summarize_inGPT(text, words)
             print(response)
         elif type == 4:
             response = get_keywordsGPT(text, keyNum)
             print(response)
-        elif type == 5:
-            response = summarize_inGPT(text, words)
-            print(response)
-
     elif ai == 2:
         if type == 1:
             response = qeaLlama(text)
@@ -76,13 +76,13 @@ def search(request):
             response = translateLlama(text, from_lang, to_lang)
             print(response)
         elif type == 3:
-            response = summarizeLlama(text, amount)
+            if amount != '':
+                response = summarizeLlama(text, amount)
+            elif words != '':
+                response = summarize_inLlama(text, words)
             print(response)
         elif type == 4:
             response = get_keywordsLlama(text, keyNum)
-            print(response)
-        elif type == 5:
-            response = summarize_inLlama(text, words)
             print(response)
 
     elif ai == 3:
@@ -100,9 +100,6 @@ def search(request):
             print(response)
         elif type == 4:
             response = get_keywordsHercai(text, keyNum)
-            print(response)
-        elif type == 5:
-            response = summarizeHercai(text)
             print(response)
 
     Historic.objects.create(ai=ai_instance, function=type_instance, question=text, user=user_instance, choice=response)
