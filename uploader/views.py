@@ -4,17 +4,17 @@ from uploader.models import Document, Image
 from uploader.serializers import DocumentUploadSerializer, ImageUploadSerializer
 
 
-class CreateViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class CreateListViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     pass
 
 
-class DocumentUploadViewSet(CreateViewSet):
+class DocumentUploadViewSet(CreateListViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentUploadSerializer
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
 
-class ImageUploadViewSet(CreateViewSet):
+class ImageUploadViewSet(CreateListViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageUploadSerializer
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
