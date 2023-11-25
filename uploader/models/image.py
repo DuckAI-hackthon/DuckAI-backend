@@ -33,6 +33,8 @@ class Image(models.Model):
         ),
     )
     file = models.ImageField(upload_to=image_file_path)
+    nome = models.CharField(max_length=50, blank=True)
+    turma = models.CharField(max_length=15, blank=True)
     description = models.CharField(max_length=255, blank=True)
     uploaded_on = models.DateTimeField(auto_now_add=True)
 
